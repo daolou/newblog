@@ -145,12 +145,24 @@ router.post('/:postId/comment', checkLogin, function(req, res, next) {
     postId: postId,
     content: content
   };
+  try {
+    if (comment.content.replace(/(^s*)|(s*$)/g,'').length == 0) {
+      throw new Error('请输入留言');
+    }
+    
+  } catch (e) {
+    req.flash('error', e.message);
+    // 留言成功后跳转到上一页
+    res.redirect('back');
+  }
 
   CommentModel.create(comment)
     .then(function () {
+      
       req.flash('success', '留言成功');
       // 留言成功后跳转到上一页
       res.redirect('back');
+      
     })
     .catch(next);
 });

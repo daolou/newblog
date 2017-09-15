@@ -70,3 +70,9 @@ a:hover{
 .post-content .tag.right a{
     color: #999;
 }
+
+/* ---------- comments ---------- */
+
+.ui.comments .comment{
+    overflow: hidden;
+}

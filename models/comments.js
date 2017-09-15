@@ -14,7 +14,7 @@ Comment.plugin('contentToHtml', {
 module.exports = {
   // 创建一个留言
   create: function create(comment) {
-    return Comment.create(comment).exec();
+    return Comment.create(comment).exec();    
   },
 
   // 通过用户 id 和留言 id 删除一个留言
