@@ -19,6 +19,7 @@
     "express-formidable": "^1.0.0",
     "express-session": "^1.15.5",
     "express-winston": "^2.4.0",
+    "markdown": "^0.5.0",
     "marked": "^0.3.6",
     "moment": "^2.18.1",
     "mongolass": "^3.1.5",

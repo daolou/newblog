@@ -4,6 +4,7 @@ var router = express.Router();
 var PostModel = require('../models/posts');
 var CommentModel = require('../models/comments');
 var checkLogin = require('../middlewares/check').checkLogin;
+var markdown = require('markdown').markdown
 
 // GET /posts 所有用户或者特定用户的文章页
 //   eg: GET /posts?author=xxx
@@ -64,7 +65,7 @@ router.post('/', checkLogin, function(req, res, next) {
 // GET /posts/:postId 单独一篇的文章页
 router.get('/:postId', function(req, res, next) {
   var postId = req.params.postId;
-  
+
   Promise.all([
     PostModel.getPostById(postId),// 获取文章信息
     CommentModel.getComments(postId),// 获取该文章所有留言
@@ -144,9 +145,9 @@ router.post('/:postId/comment', checkLogin, function(req, res, next) {
   var comment = {
     author: author,
     postId: postId,
-    content: content
+    content: markdown.toHTML(content)
   };
-  
+
   try {
     if (comment.content.replace(/(^s*)|(s*$)/g,'').length == 0) {
       throw new Error('请输入留言');
@@ -154,18 +155,19 @@ router.post('/:postId/comment', checkLogin, function(req, res, next) {
     if (comment.content.replace(/(^s*)|(s*$)/g,'').length > 0) {
       CommentModel.create(comment)
       .then(function () {
-        
+
         req.flash('success', '留言成功');
         // 留言成功后跳转到上一页
         res.redirect('back');
-        
+
       })
       .catch(next);
     }
 
   } catch (e) {
     req.flash('error', e.message);
-    // 留言成功后跳转到上一页
+    console.log(e)
+    // 留言失败后跳转到上一页
     res.redirect('back');
   }
 
