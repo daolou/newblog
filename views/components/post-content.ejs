@@ -12,13 +12,13 @@
     <div class="eight wide column">
       <div class="ui segment">
         <h3><a href="/posts/<%= post._id %>"><%= post.title %></a></h3>
-        <pre><%- post.content %></pre>
+        <pre><code><%- post.content %></code></pre>
         <div>
           <span class="tag"><%= post.created_at %></span>
           <span class="tag right">
             <span>浏览(<%= post.pv %>)</span>
             <span>留言(<%= post.commentsCount %>)</span>
-            
+
             <% if (user && post.author._id && user._id.toString() === post.author._id.toString()) { %>
               <div class="ui inline dropdown">
                 <div class="text"></div>

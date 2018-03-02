@@ -4,7 +4,7 @@
     <div class="ui segment">
       <div class="ui minimal comments">
         <h3 class="ui dividing header">留言</h3>
-        
+
         <% comments.forEach(function (comment) { %>
           <div class="comment">
             <span class="avatar">
@@ -15,7 +15,7 @@
               <div class="metadata">
                 <span class="date"><%= comment.created_at %></span>
               </div>
-              <div class="text"><%- comment.content %></div>
+              <div class="text"><pre><code><%- comment.content %></code></pre></div>
 
               <% if (user && comment.author._id && user._id.toString() === comment.author._id.toString()) { %>
                 <div class="actions">
