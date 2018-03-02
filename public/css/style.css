@@ -20,6 +20,9 @@ a:hover{
     height: 48px;
     float: right;
 }
+.oh{
+    overflow: hidden;
+}
 
 /* ---------- nav ---------- */
 .nav{
@@ -37,7 +40,7 @@ a:hover{
 /* ---------- nav-setting ---------- */
 .nav-setting{
     position: fixed;
-    right: 30px;
+    right: 15px;
     top: 35px;
     z-index: 999;
 }

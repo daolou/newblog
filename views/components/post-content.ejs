@@ -9,11 +9,11 @@
       </a>
     </div>
 
-    <div class="eight wide column">
+    <div class="ten wide column">
       <div class="ui segment">
         <h3><a href="/posts/<%= post._id %>"><%= post.title %></a></h3>
         <pre><code><%- post.content %></code></pre>
-        <div>
+        <div class="oh">
           <span class="tag"><%= post.created_at %></span>
           <span class="tag right">
             <span>浏览(<%= post.pv %>)</span>
