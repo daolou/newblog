@@ -91,6 +91,7 @@ a:hover{
 
 .ui.minimal.comments{
     width: 100%;
+    max-width: 100%;
 }
 .ui.comments .comment{
     overflow: hidden;
