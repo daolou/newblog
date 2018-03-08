@@ -4,7 +4,8 @@ var router = express.Router();
 var PostModel = require('../models/posts');
 var CommentModel = require('../models/comments');
 var checkLogin = require('../middlewares/check').checkLogin;
-var markdown = require('markdown').markdown
+var markdown = require('markdown').markdown;
+var cheerio = require('cheerio')
 
 // GET /posts 所有用户或者特定用户的文章页
 //   eg: GET /posts?author=xxx
@@ -30,6 +31,7 @@ router.post('/', checkLogin, function(req, res, next) {
   var author = req.session.user._id;
   var title = req.fields.title;
   var content = req.fields.content;
+  var $ = cheerio.load(content)
 
   // 校验参数
   try {
@@ -37,6 +39,9 @@ router.post('/', checkLogin, function(req, res, next) {
       throw new Error('请填写标题');
     }
     if (!content.length) {
+      throw new Error('请填写内容');
+    }
+    if (!$.text().replace(/\s+/g,'').length) {
       throw new Error('请填写内容');
     }
   } catch (e) {
@@ -112,6 +117,23 @@ router.post('/:postId/edit', checkLogin, function(req, res, next) {
   var author = req.session.user._id;
   var title = req.fields.title;
   var content = req.fields.content;
+  var $ = cheerio.load(content)
+
+  // 校验参数
+  try {
+    if (!title.length) {
+      throw new Error('请填写标题');
+    }
+    if (!content.length) {
+      throw new Error('请填写内容');
+    }
+    if (!$.text().replace(/\s+/g,'').length) {
+      throw new Error('请填写内容');
+    }
+  } catch (e) {
+    req.flash('error', e.message);
+    return res.redirect('back');
+  }
 
   PostModel.updatePostById(postId, author, { title: title, content: content })
     .then(function () {

@@ -18,11 +18,27 @@
       </div>
       <div class="field required">
         <label>内容</label>
-        <textarea name="content" rows="15"><%= post.content %></textarea>
+        <div id="editor"><%- post.content %></div>
+        <textarea id="text" class="ui label hidden" name="content" rows="15"></textarea>
       </div>
       <input type="submit" class="ui button" value="发布">
     </form>
   </div>
 </div>
 
+<script src="https://cdn.bootcss.com/wangEditor/3.0.17/wangEditor.min.js"></script>
+<script>
+  var E = window.wangEditor
+  var editor = new E('#editor')
+  var $text = $('#text')
+  editor.customConfig.uploadImgShowBase64 = true // 使用 base64 保存图片
+  editor.customConfig.onchange = function (html) {
+    // 监控变化,同步更新到textarea
+    $text.val(html)
+  }
+  editor.create()
+  // 初始化 textarea 的值
+  // $text.val(editor.txt.html())
+
+</script>
 <%- include('footer') %>

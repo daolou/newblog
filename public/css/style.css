@@ -20,6 +20,18 @@ a:hover{
     height: 48px;
     float: right;
 }
+.clearfix:after {
+    content: "";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
 .oh{
     overflow: hidden;
 }
@@ -77,6 +89,9 @@ a:hover{
 
 /* ---------- comments ---------- */
 
+.ui.minimal.comments{
+    width: 100%;
+}
 .ui.comments .comment{
     overflow: hidden;
 }
