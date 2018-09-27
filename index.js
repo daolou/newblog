@@ -58,9 +58,11 @@ app.use(expressWinston.logger({
   transports: [
     new (winston.transports.Console)({
       json: true,
-      colorize: true
+      colorize: true,
+      zippedArchive: true,
+      maxsize: 3*1024*1024
     }),
-    new winston.transports.File({
+    new (winston.transports.File)({
       filename: 'logs/success.log'
     })
   ]
@@ -70,11 +72,13 @@ routes(app);
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
   transports: [
-    new winston.transports.Console({
+    new (winston.transports.Console)({
       json: true,
-      colorize: true
+      colorize: true,
+      zippedArchive: true,
+      maxsize: 3*1024*1024
     }),
-    new winston.transports.File({
+    new (winston.transports.File)({
       filename: 'logs/error.log'
     })
   ]
