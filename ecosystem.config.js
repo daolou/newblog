@@ -6,7 +6,7 @@ module.exports = {
   apps : [
     // First application
     {
-      name : 'newBlog',
+      name : 'newblog',
       script : './index.js',
       node_args: '--harmony',
       env : {

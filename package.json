@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "supervisor --harmony index",
-    "start": "NODE_ENV=production pm2 start index.js --node-args='--harmony' --name 'newBlog'",
+    "start": "NODE_ENV=production pm2 start index.js --node-args='--harmony' --name 'newblog'",
     "heroku": "NODE_ENV=production node --harmony index"
   },
   "author": "jzg",

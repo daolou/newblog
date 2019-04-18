@@ -9,7 +9,7 @@ trim()
 }
 
 # projectName=$(trim "${container_name}")
-projectName="newBlog"
+projectName="newblog"
 
 dockerImageName=$(trim "${image_name}")
 
