@@ -11,8 +11,11 @@ COPY package.json ./
 RUN npm i
 
 # 分割日志
-RUN pm2 install pm2-logrotate
-RUN pm2 set pm2-logrotate:compress true
+# RUN pm2 install pm2-logrotate
+# RUN pm2 set pm2-logrotate:compress true
+
+# 拷贝源代码(ecosystem.config.js)到docker工作目录
+COPY ./ ./
 
 EXPOSE 8080
 
