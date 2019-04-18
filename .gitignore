@@ -4,3 +4,4 @@ node_modules
 coverage
 img/
 *.log
+package-lock.json
