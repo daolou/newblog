@@ -2,7 +2,7 @@
 FROM keymetrics/pm2:8-alpine
 
 # 设置容器的工作目录
-WORKDIR /var/nodejs
+WORKDIR /var/nodejs/newblog
 
 # 将package.json拷贝到容器里
 COPY package.json ./
