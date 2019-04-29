@@ -8,8 +8,13 @@ var routes = require('./routes');
 var pkg = require('./package');
 var winston = require('winston');
 var expressWinston = require('express-winston');
-
+var Sentry = require('@sentry/node');
 var app = express();
+
+Sentry.init({
+  dsn: 'https://b7144b797869478e86c2a9b929383c94@sentry.io/1334570',
+  integrations: [new MyAwesomeIntegration()]
+});
 
 // 设置模板目录
 app.set('views', path.join(__dirname, 'views'));
@@ -60,7 +65,7 @@ app.use(expressWinston.logger({
       json: true,
       colorize: true,
       zippedArchive: true,
-      maxsize: 3*1024*1024
+      maxsize: 3 * 1024 * 1024
     }),
     new (winston.transports.File)({
       filename: 'logs/success.log'
@@ -76,7 +81,7 @@ app.use(expressWinston.errorLogger({
       json: true,
       colorize: true,
       zippedArchive: true,
-      maxsize: 3*1024*1024
+      maxsize: 3 * 1024 * 1024
     }),
     new (winston.transports.File)({
       filename: 'logs/error.log'
@@ -88,6 +93,12 @@ app.use(expressWinston.errorLogger({
 app.use(function (err, req, res, next) {
   res.render('error', {
     error: err
+  });
+});
+
+app.on('error', function (err, ctx) {
+  Sentry.captureException(err, function (err, eventId) {
+    console.log('Reported error ' + eventId);
   });
 });
 

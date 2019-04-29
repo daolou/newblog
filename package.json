@@ -13,6 +13,7 @@
   "author": "jzg",
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^5.1.0",
     "cheerio": "^1.0.0-rc.2",
     "config-lite": "^2.1.0",
     "connect-flash": "^0.1.1",
