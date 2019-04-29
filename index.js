@@ -12,7 +12,7 @@ var Sentry = require('@sentry/node');
 var app = express();
 
 Sentry.init({
-  dsn: 'https://b7144b797869478e86c2a9b929383c94@sentry.io/1334570',
+  dsn: 'http://b7144b797869478e86c2a9b929383c94@sentry.io/1334570',
   integrations: [new MyAwesomeIntegration()]
 });
 
