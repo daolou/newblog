@@ -21,6 +21,9 @@ app.set('views', path.join(__dirname, 'views'));
 // 设置模板引擎为 ejs
 app.set('view engine', 'ejs');
 
+// The request handler must be the first middleware on the app
+app.use(Sentry.Handlers.requestHandler());
+
 // 设置静态文件目录
 app.use(express.static(path.join(__dirname, 'public')));
 // session 中间件
@@ -89,6 +92,8 @@ app.use(expressWinston.errorLogger({
   ]
 }));
 
+// The error handler must be before any other error middleware
+app.use(Sentry.Handlers.errorHandler());
 // error page
 app.use(function (err, req, res, next) {
   Sentry.captureException(err, function (err, eventId) {
