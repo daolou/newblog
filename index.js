@@ -91,14 +91,11 @@ app.use(expressWinston.errorLogger({
 
 // error page
 app.use(function (err, req, res, next) {
-  res.render('error', {
-    error: err
-  });
-});
-
-app.on('error', function (err, ctx) {
   Sentry.captureException(err, function (err, eventId) {
     console.log('Reported error ' + eventId);
+  });
+  res.render('error', {
+    error: err
   });
 });
 
