@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 trim()
 {
@@ -17,5 +17,5 @@ echo "******************************************* 回退到镜像${image_name} �
 sudo mkdir -p /var/nodejs/logs/${projectName} || true \
 && sudo docker stop ${projectName} || true \
 && sudo docker rm ${projectName} || true \
-&& sudo docker run -d --net=host --name ${projectName} -v /var/nodejs/logs/${projectName}:/var/nodejs/${projectName}/logs ${dockerImageName} \
-&& echo "************************************* 使用镜像${dockerImageName}启动容器${projectName}  finish *************************************"
+&& sudo docker run -d --net=host --name ${projectName} -v /var/nodejs/logs/${projectName}:/var/nodejs/${projectName}/logs ${dockerImageName}
+echo "************************************* 使用镜像${dockerImageName}启动容器${projectName}  finish *************************************"
